@@ -41,7 +41,7 @@ RUN \
     && eval "$(pyenv init -)" && pyenv install ${PYTHON_VERSION} \
     && eval "$(pyenv init -)" && pyenv global ${PYTHON_VERSION} \
     && eval "$(pyenv init -)" && pip install --upgrade pip \
-    && eval "$(pyenv init -)" && pip install numpy setuptools libgdal-arrow-parquet \
+    && eval "$(pyenv init -)" && pip install numpy setuptools \
     # Install GDAL
     && export CMAKE_BUILD_PARALLEL_LEVEL=`nproc --all` \
     && mkdir -p "${SOURCE_DIR}" \
@@ -59,6 +59,9 @@ RUN \
         -DGDAL_PYTHON_INSTALL_PREFIX=`pyenv prefix` \
     && cmake --build . \
     && cmake --build . --target install \
+    && wget "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O ~/miniconda.sh \
+    && bash ~/miniconda.sh -b -p $HOME/miniconda \
+    && conda install -c conda-forge libgdal-arrow-parquet \
     && ldconfig \
     # Clean-up
     && apt-get update -y \
