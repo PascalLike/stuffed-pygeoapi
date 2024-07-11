@@ -41,7 +41,7 @@ RUN \
     && eval "$(pyenv init -)" && pyenv install ${PYTHON_VERSION} \
     && eval "$(pyenv init -)" && pyenv global ${PYTHON_VERSION} \
     && eval "$(pyenv init -)" && pip install --upgrade pip \
-    && eval "$(pyenv init -)" && pip install numpy setuptools \
+    && eval "$(pyenv init -)" && pip install numpy setuptools libgdal-arrow-parquet \
     # Install GDAL
     && export CMAKE_BUILD_PARALLEL_LEVEL=`nproc --all` \
     && mkdir -p "${SOURCE_DIR}" \
