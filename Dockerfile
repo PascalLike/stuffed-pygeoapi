@@ -8,8 +8,7 @@ ENV PYENV_ROOT="/usr/local/pyenv"
 ENV PATH="/usr/local/pyenv/shims:/usr/local/pyenv/bin:$PATH"
 
 
-RUN   echo "GDAL==3.9.1" > requirements-stuffed.txt 
-RUN   python3 -m pip install --no-cache-dir -r requirements-stuffed.txt 
+RUN   python3 -m pip install GDAL==3.9.1
 RUN   python3 -m pip install --no-cache-dir -e . 
 
 RUN \
