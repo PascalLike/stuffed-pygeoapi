@@ -7,11 +7,13 @@ ARG SOURCE_DIR=/usr/local/src/python-gdal
 ENV PYENV_ROOT="/usr/local/pyenv"
 ENV PATH="/usr/local/pyenv/shims:/usr/local/pyenv/bin:$PATH"
 
+
+RUN   echo "GDAL==3.9.1" > requirements-stuffed.txt 
+RUN   python3 -m pip install --no-cache-dir -r requirements-stuffed.txt 
+RUN   python3 -m pip install --no-cache-dir -e . 
+
 RUN \
     # Install runtime dependencies
-    echo "GDAL==3.9.1" > requirements-stuffed.txt \
-    python3 -m pip install --no-cache-dir -r requirements-stuffed.txt \
-    python3 -m pip install --no-cache-dir -e . \
     apt-get update \
     && apt-get install -y --no-install-recommends \
         build-essential \
